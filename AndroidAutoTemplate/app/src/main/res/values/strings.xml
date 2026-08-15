@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Auto Template</string>
+    <string name="phone_message">Android Auto Template is installed. Connect this phone to the Desktop Head Unit to open the car interface.</string>
+</resources>

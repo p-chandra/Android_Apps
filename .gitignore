@@ -1,0 +1,13 @@
+# Shared local toolchains
+/.android-sdk/
+/.jdk/
+/.tools/
+
+# Gradle and Android build output
+.gradle/
+**/build/
+local.properties
+
+# IDE and machine-specific files
+.idea/
+*.iml
