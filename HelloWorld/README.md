@@ -1,25 +1,5 @@
-# Hello World Android App
+# IMAX Seat Tracker
 
-A minimal native Android app that displays **Hello World!**. The shared JDK and
-Android SDK are stored one level above this project and excluded from Git.
+A native Android prototype for choosing an IMAX movie at Harkins Arizona Mills 25 and a date range, then viewing a seat-availability summary. Availability currently uses demo data; the UI is ready for a cinema listings API.
 
-## Build
-
-```bash
-cd HelloWorld
-./build.sh
-```
-
-The debug APK is created at:
-
-```text
-app/build/outputs/apk/debug/app-debug.apk
-```
-
-## Install on a connected Android device
-
-Enable USB debugging on the device, connect it, and run:
-
-```bash
-./.android-sdk/platform-tools/adb install -r app/build/outputs/apk/debug/app-debug.apk
-```
+Build with `./build.sh`. The APK is written to `app/build/outputs/apk/debug/app-debug.apk`.

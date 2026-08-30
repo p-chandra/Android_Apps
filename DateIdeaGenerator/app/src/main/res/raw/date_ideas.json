@@ -1,0 +1,345 @@
+[
+  {
+    "title": "Bar",
+    "description": "A Bar with billards and music",
+    "dating-length": 1,
+    "mood": "Indoor",
+    "energy": "Relaxed"
+  },
+  {
+    "title": "Barnes & Noble",
+    "description": "Get coffee, buy a puzzle and work together. Honestly the best first date idea if you both are into reading",
+    "dating-length": 1,
+    "mood": "Indoor",
+    "energy": "Relaxed"
+  },
+  {
+    "title": "Museum",
+    "description": "Museum is the move if its too hot outside and both of you are artistic or into fantasy/Sci-Fi",
+    "dating-length": 1,
+    "mood": "Indoor",
+    "energy": "Relaxed"
+  },
+  {
+    "title": "Farmers Market",
+    "description": " This is a nice stroll and a great ice breaker if one of you can lead/yap",
+    "dating-length": 1,
+    "mood": "Outdoor",
+    "energy": "Relaxed"
+  },
+  {
+    "title": "Picnic",
+    "description": "High effort but worth it. Bring games, snacks, drinks, a blanket, and positivity",
+    "dating-length": 1,
+    "mood": "Outdoor",
+    "energy": "Relaxed"
+  },
+  {
+    "title": "Botanical Garden",
+    "description": "Easy walk, pretty scenery, and plenty to talk about without the pressure of sitting face to face the whole time",
+    "dating-length": 1,
+    "mood": "Outdoor",
+    "energy": "Relaxed"
+  },
+  {
+    "title": "Coffee Walk",
+    "description": "Grab coffee then walk around a nice neighborhood, park, or downtown area. Simple but actually good for talking",
+    "dating-length": 1,
+    "mood": "Outdoor",
+    "energy": "Relaxed"
+  },
+  {
+    "title": "Food Truck Crawl",
+    "description": "Try a few random spots and rate everything together. Low commitment but fun if you both like food",
+    "dating-length": 1,
+    "mood": "Outdoor",
+    "energy": "Relaxed"
+  },
+  {
+    "title": "Zoo",
+    "description": "Always a good time with and a perfect ice breaker, talk shit about the animals",
+    "dating-length": 1,
+    "mood": "Outdoor",
+    "energy": "Active"
+  },
+  {
+    "title": "Hiking",
+    "description": "Only if you're in shape else its going to be a long day",
+    "dating-length": 1,
+    "mood": "Outdoor",
+    "energy": "Active"
+  },
+  {
+    "title": "Thrifting",
+    "description": "Great for people who are into vintage fashion and unique finds",
+    "dating-length": 1,
+    "mood": "Indoor",
+    "energy": "Relaxed"
+  },
+  {
+    "title": "Escape Room",
+    "description": "Perfect for the over-achievers and overthinkers",
+    "dating-length": 1,
+    "mood": "Indoor",
+    "energy": "Active"
+  },
+  {
+    "title": "Aquarium",
+    "description": "Just like museum but for people who are more into animals than art",
+    "dating-length": 1,
+    "mood": "Indoor",
+    "energy": "Relaxed"
+  },
+  {
+    "title": "Mini Golf",
+    "description": "As casual as it gets. Perfect for people who are competitive but lack hand eye coordination",
+    "dating-length": 1,
+    "mood": "Indoor",
+    "energy": "Active"
+  },
+  {
+    "title": "Arcade",
+    "description": "For the retro lovers but also for the alcoholics. Another great ice breaker for people who lack hobbies",
+    "dating-length": 1,
+    "mood": "Indoor",
+    "energy": "Relaxed"
+  },
+  {
+    "title": "Outdoor Pickleball",
+    "description": "For people who already know how to play or actually want to learn. If you drink matcha, chances are you will be good at this sport",
+    "dating-length": 1,
+    "mood": "Outdoor",
+    "energy": "Active"
+  },
+  {
+    "title": "Indoor Pickleball",
+    "description": "For people who already know how to play or actually want to learn. If you drink matcha, chances are you will be good at this sport",
+    "dating-length": 1,
+    "mood": "Indoor",
+    "energy": "Active"
+  },
+  {
+    "title": "Tennis",
+    "description": "..if both of you play sports and have some hand eye coordination. Also great if you both suck at it and can laugh at yourselves",
+    "dating-length": 1,
+    "mood": "Outdoor",
+    "energy": "Active"
+  },
+  {
+    "title": "Fishing",
+    "description": ".. but only if shes really into you and you know how to fish. Shes your number one fan and you like her company",
+    "dating-length": 1,
+    "mood": "Outdoor",
+    "energy": "Relaxed"
+  },
+  {
+    "title": "Bouldering",
+    "description": "For the adventure seekers and gym rats",
+    "dating-length": 1,
+    "mood": "Indoor",
+    "energy": "Active"
+  },
+  {
+    "title": "Rollerblading Ice Skating",
+    "description": "For the people who aren't scared to live freely",
+    "dating-length": 1,
+    "mood": "Outdoor",
+    "energy": "Active"
+  },
+  {
+    "title": "Indoor Driving Range",
+    "description": "Great way to enjoy the weather, be outdoors, and have fun. Do not recommend if you're scared of embarrassment (you're no fun)",
+    "dating-length": 1,
+    "mood": "Indoor",
+    "energy": "Relaxed"
+  },
+  {
+    "title": "Outdoor Driving Range",
+    "description": "Great way to enjoy the weather, be outdoors, and have fun. Do not recommend if you're scared of embarrassment (you're no fun)",
+    "dating-length": 1,
+    "mood": "Outdoor",
+    "energy": "Relaxed"
+  },
+  {
+    "title": "Shooting Range",
+    "description": "Great ice breaker, and gets the adrenaline going. One of you needs to be experienced",
+    "dating-length": 1,
+    "mood": "Indoor",
+    "energy": "Relaxed"
+  },
+  {
+    "title": "Bowling",
+    "description": "Low energy, great for roasting and yapping but also for the vibes",
+    "dating-length": 1,
+    "mood": "Indoor",
+    "energy": "Relaxed"
+  },
+  {
+    "title": "Cooking Class",
+    "description": "For the people who are both really shy or socially awkward but want to learn to be more adventurous",
+    "dating-length": 1,
+    "mood": "Indoor",
+    "energy": "Relaxed"
+  },
+  {
+    "title": "Dancing Class",
+    "description": "Only if you both suck at dancing but love music. Or both of you like music and are into each other. Its intimate",
+    "dating-length": 1,
+    "mood": "Indoor",
+    "energy": "Active"
+  },
+  {
+    "title": "Painting",
+    "description": "This is fun in general. Doesn't require much experience and its a great ice breaker. Perfect to combo this with drinks or picnics etc.",
+    "dating-length": 1,
+    "mood": "Indoor",
+    "energy": "Relaxed"
+  },
+  {
+    "title": "Ceramic Class",
+    "description": "It requires a lot of patience and is a bit more advanced than painting. But if you both are artsy, this is a great date idea",
+    "dating-length": 1,
+    "mood": "Indoor",
+    "energy": "Relaxed"
+  },
+  {
+    "title": "Cook Dinner",
+    "description": "Put a movie on, make dinner, drink wine, and just relax and socialize",
+    "dating-length": 1,
+    "mood": "Indoor",
+    "energy": "Relaxed"
+  },
+  {
+    "title": "Ikea Run",
+    "description": "If its too hot to walk outside then go on an Ikea run! Plenty of things to talk about, check out each others style",
+    "dating-length": 2,
+    "mood": "Indoor",
+    "energy": "Relaxed"
+  },
+  {
+    "title": "Movies",
+    "description": "Good for 2nd or third date minimum. Not a great first date idea. Pick a random movie to make it interesting",
+    "dating-length": 2,
+    "mood": "Indoor",
+    "energy": "Relaxed"
+  },
+  {
+    "title": "Concerts",
+    "description": "Pick a random artist/genre and just go in blind to make things more interesting",
+    "dating-length": 2,
+    "mood": "Indoor",
+    "energy": "Active"
+  },
+  {
+    "title": "Raves",
+    "description": "Only works if you go to a local set and both are open minded about music and love to dance",
+    "dating-length": 2,
+    "mood": "Indoor",
+    "energy": "Active"
+  },
+  {
+    "title": "Trivia Night",
+    "description": "Perfect if you want something social without it feeling too intense. Bonus points if you both are confidently wrong",
+    "dating-length": 2,
+    "mood": "Indoor",
+    "energy": "Active"
+  },
+  {
+    "title": "Carnivals",
+    "description": "Requires very little planning but a lot of money. If your idea of a vacation is relaxing then this is perfect",
+    "dating-length": 2,
+    "mood": "Outdoor",
+    "energy": "Active"
+  },
+  {
+    "title": "Beach Day",
+    "description": "Pack snacks, bring towels, walk around, and hang out by the water. Works best when you can make a whole afternoon out of it",
+    "dating-length": 2,
+    "mood": "Outdoor",
+    "energy": "Relaxed"
+  },
+  {
+    "title": "Lunch - Dinner",
+    "description": "Great for catching up but also spending time with each other, especially if the spark is dying",
+    "dating-length": 2,
+    "mood": "Indoor",
+    "energy": "Relaxed"
+  },
+  {
+    "title": "Comedy Show",
+    "description": "Great if you both have a similar sense of humor. Also gives you something easy to talk about after",
+    "dating-length": 2,
+    "mood": "Indoor",
+    "energy": "Relaxed"
+  },
+  {
+    "title": "Library",
+    "description": "Library is a perfect place if you both need to get work done or some light reading but are tired of being home",
+    "dating-length": 2,
+    "mood": "Indoor",
+    "energy": "Relaxed"
+  },
+  {
+    "title": "Jigsaw Puzzles",
+    "description": "Jigsaw Puzzles are a must. Throw a movie or music on in the background and just catch up",
+    "dating-length": 2,
+    "mood": "Indoor",
+    "energy": "Relaxed"
+  },
+  {
+    "title": "Board Games",
+    "description": "This is a great way to challenge each other and there are so many board game options to choose from. Great for people who are competitive or are still getting to know each other",
+    "dating-length": 2,
+    "mood": "Indoor",
+    "energy": "Relaxed"
+  },
+  {
+    "title": "Renaissance Faire",
+    "description": "Is a such a unique experience great for all types of people",
+    "dating-length": 2,
+    "mood": "Outdoor",
+    "energy": "Active"
+  },
+  {
+    "title": "Travel - road-trip",
+    "description": "Cruise, out-of-state, national parks, etc.",
+    "dating-length": 3,
+    "mood": "Mixed",
+    "energy": "Active"
+  },
+  {
+    "title": "DIY Projects",
+    "description": "DIY Projects are a great way to stay creative and have fun together",
+    "dating-length": 3,
+    "mood": "Indoor",
+    "energy": "Active"
+  },
+  {
+    "title": "Anime Convention",
+    "description": "Dress up even if you're not into anime. Like halloween but better",
+    "dating-length": 3,
+    "mood": "Indoor",
+    "energy": "Active"
+  },
+  {
+    "title": "Amtrak Trip",
+    "description": "A great way to see the country and spend QUALITY time together",
+    "dating-length": 3,
+    "mood": "Mixed",
+    "energy": "Relaxed"
+  },
+  {
+    "title": "Volunteer Together",
+    "description": "A meaningful date if you both care about the same causes. Also shows a lot about someone's character",
+    "dating-length": 3,
+    "mood": "Mixed",
+    "energy": "Active"
+  },
+  {
+    "title": "Weekend Cabin Stay",
+    "description": "Cook, watch movies, go for walks, and fully reset together. Definitely more of a long-term relationship move",
+    "dating-length": 3,
+    "mood": "Mixed",
+    "energy": "Relaxed"
+  }
+]
