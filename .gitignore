@@ -1,13 +1,46 @@
-# Shared local toolchains
+# Local Android/JDK toolchains
 /.android-sdk/
 /.jdk/
 /.tools/
 
-# Gradle and Android build output
+# Gradle caches and build output
 .gradle/
 **/build/
-local.properties
+.kotlin/
+**/.externalNativeBuild/
+**/.cxx/
 
-# IDE and machine-specific files
+# Built packages and profiling output
+*.apk
+*.aab
+*.ap_
+*.hprof
+
+# Machine-specific Android configuration
+local.properties
+captures/
+
+# Signing credentials and local secrets
+*.jks
+*.keystore
+keystore.properties
+secrets.properties
+.env
+.env.*
+!.env.example
+
+# Android Studio and editors
 .idea/
 *.iml
+.vscode/
+*.swp
+*~
+
+# Operating-system files
+.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Logs and temporary files
+*.log
+*.tmp

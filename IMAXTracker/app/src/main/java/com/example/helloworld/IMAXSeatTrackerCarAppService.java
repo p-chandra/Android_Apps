@@ -15,9 +15,9 @@ public class IMAXSeatTrackerCarAppService extends CarAppService {
         TrackerScreen(@NonNull CarContext context) { super(context); }
         @NonNull @Override public Template onGetTemplate() {
             Pane pane = new Pane.Builder()
-                    .addRow(new Row.Builder().setTitle("IMAX Seat Tracker").addText("Choose movies and dates in the phone app.").build())
+                    .addRow(new Row.Builder().setTitle("IMAX Tracker").addText("Choose movies and dates in the phone app.").build())
                     .addRow(new Row.Builder().setTitle("Tracking ready").addText("Your availability summary will appear here.").build()).build();
-            return new PaneTemplate.Builder(pane).setTitle("IMAX Seat Tracker").setHeaderAction(Action.APP_ICON).build();
+            return new PaneTemplate.Builder(pane).setTitle("IMAX Tracker").setHeaderAction(Action.APP_ICON).build();
         }
     }
 }

@@ -5,8 +5,8 @@ app lives in its own directory with its own Gradle wrapper and documentation.
 
 ## Projects
 
-- [`HelloWorld/`](HelloWorld/) — a minimal native Android app that displays
-  **Hello World!**
+- [`IMAXTracker/`](IMAXTracker/) — an Android client that requests live Harkins
+  IMAX seat scans from a Raspberry Pi over Tailscale
 - [`AndroidAutoTemplate/`](AndroidAutoTemplate/) — a local-development starter
   for projected Android Auto apps using the Car App Library
 

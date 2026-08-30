@@ -14,5 +14,5 @@ dependencyResolutionManagement {
     }
 }
 
-rootProject.name = "HelloWorld"
+rootProject.name = "IMAXTracker"
 include(":app")

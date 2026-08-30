@@ -10,10 +10,21 @@ import android.content.SharedPreferences;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.*;
+import org.json.JSONArray;
+import org.json.JSONObject;
+import java.io.BufferedReader;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.OutputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Locale;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class MainActivity extends Activity {
     private final Calendar startDate = Calendar.getInstance();
@@ -21,6 +32,9 @@ public class MainActivity extends Activity {
     private TextView startValue, endValue, resultTitle, resultDates, resultDetails;
     private Spinner movieSpinner, firstRowSpinner, lastRowSpinner, firstSeatSpinner, lastSeatSpinner;
     private LinearLayout resultCard;
+    private EditText serverAddress;
+    private Button checkButton;
+    private final ExecutorService networkExecutor = Executors.newSingleThreadExecutor();
 
     @Override public void onCreate(Bundle state) {
         super.onCreate(state);
@@ -36,7 +50,7 @@ public class MainActivity extends Activity {
         page.setPadding(dp(24), dp(28), dp(24), dp(32));
         scroll.addView(page, matchWrap());
 
-        TextView eyebrow = text("IMAX SEAT TRACKER", 12, Color.rgb(67, 211, 255));
+        TextView eyebrow = text("IMAX TRACKER", 12, Color.rgb(67, 211, 255));
         eyebrow.setTypeface(Typeface.DEFAULT_BOLD);
         eyebrow.setLetterSpacing(.18f);
         page.addView(eyebrow);
@@ -58,6 +72,18 @@ public class MainActivity extends Activity {
         theater.setPadding(dp(14), 0, dp(10), 0);
         theater.setBackground(rounded(Color.rgb(27,37,54), 12, Color.rgb(53,68,91)));
         card.addView(theater, fixedHeight(54, 0, 8, 0, 18));
+        card.addView(label("RASPBERRY PI API"));
+        serverAddress = new EditText(this);
+        serverAddress.setSingleLine(true);
+        serverAddress.setTextColor(Color.WHITE);
+        serverAddress.setHintTextColor(Color.rgb(93,111,137));
+        serverAddress.setTextSize(15);
+        serverAddress.setHint("http://100.x.x.x:8000");
+        serverAddress.setText(getPreferences(MODE_PRIVATE).getString(
+                "server_address", "http://100.117.156.54:8000"));
+        serverAddress.setPadding(dp(14), 0, dp(10), 0);
+        serverAddress.setBackground(rounded(Color.rgb(27,37,54), 12, Color.rgb(53,68,91)));
+        card.addView(serverAddress, fixedHeight(54, 0, 8, 0, 18));
         card.addView(label("IMAX MOVIE"));
 
         movieSpinner = new Spinner(this, Spinner.MODE_DROPDOWN);
@@ -102,13 +128,13 @@ public class MainActivity extends Activity {
         lastSeatSpinner = addChoice(seatRange, "LAST NUMBER", seatNumbers, 24, false);
         restoreSeatPreferences();
 
-        Button check = new Button(this);
-        check.setText("Check availability");
-        check.setTextColor(Color.rgb(3,20,29));
-        check.setTextSize(14); check.setTypeface(Typeface.DEFAULT_BOLD); check.setLetterSpacing(.06f);
-        check.setBackground(rounded(Color.rgb(67,211,255), 14, Color.TRANSPARENT));
-        check.setOnClickListener(v -> showResults());
-        card.addView(check, fixedHeight(58, 0, 4, 0, 0));
+        checkButton = new Button(this);
+        checkButton.setText("Check availability");
+        checkButton.setTextColor(Color.rgb(3,20,29));
+        checkButton.setTextSize(14); checkButton.setTypeface(Typeface.DEFAULT_BOLD); checkButton.setLetterSpacing(.06f);
+        checkButton.setBackground(rounded(Color.rgb(67,211,255), 14, Color.TRANSPARENT));
+        checkButton.setOnClickListener(v -> startScan());
+        card.addView(checkButton, fixedHeight(58, 0, 4, 0, 0));
 
         resultCard = column();
         resultCard.setPadding(dp(20), dp(20), dp(20), dp(20));
@@ -122,7 +148,7 @@ public class MainActivity extends Activity {
         resultCard.addView(resultDates, margins(0, 5, 0, 15));
         resultCard.addView(resultDetails);
 
-        TextView note = text("Movie choices are limited to the Arizona Mills IMAX screen. Availability is a preview until a live ticketing source is connected.", 12, Color.rgb(107,121,141));
+        TextView note = text("The phone and Raspberry Pi must both be connected to your Tailscale network. Results show availability only and do not reserve seats.", 12, Color.rgb(107,121,141));
         note.setGravity(Gravity.CENTER);
         page.addView(note, margins(8, 22, 8, 0));
         return scroll;
@@ -151,7 +177,7 @@ public class MainActivity extends Activity {
         dialog.getDatePicker().setMinDate(System.currentTimeMillis() - 1000); dialog.show();
     }
 
-    private void showResults() {
+    private void startScan() {
         String movie = String.valueOf(movieSpinner.getSelectedItem());
         int firstRow = firstRowSpinner.getSelectedItemPosition();
         int lastRow = lastRowSpinner.getSelectedItemPosition();
@@ -162,12 +188,111 @@ public class MainActivity extends Activity {
             return;
         }
         saveSeatPreferences();
-        String rowRange = firstRowSpinner.getSelectedItem() + "–" + lastRowSpinner.getSelectedItem();
-        String numberRange = firstSeat + "–" + lastSeat;
-        long days = Math.max(1, (endDate.getTimeInMillis() - startDate.getTimeInMillis()) / 86400000L + 1);
-        resultTitle.setText(movie); resultDates.setText(format(startDate) + "  —  " + format(endDate));
-        resultDetails.setText("●  " + Math.min(42, days * 3) + " IMAX showtimes to check\n●  Rows: " + rowRange + "\n●  Seat numbers: " + numberRange);
-        resultCard.setVisibility(View.VISIBLE); resultCard.announceForAccessibility("Availability shown for " + movie);
+        String baseUrl = serverAddress.getText().toString().trim().replaceAll("/+$", "");
+        if (!(baseUrl.startsWith("http://") || baseUrl.startsWith("https://"))) {
+            Toast.makeText(this, "Enter the full Pi URL, including http://", Toast.LENGTH_LONG).show();
+            return;
+        }
+        getPreferences(MODE_PRIVATE).edit().putString("server_address", baseUrl).apply();
+
+        JSONObject request = new JSONObject();
+        try {
+            request.put("start_date", isoFormat(startDate));
+            request.put("end_date", isoFormat(endDate));
+            request.put("first_row", String.valueOf(firstRowSpinner.getSelectedItem()));
+            request.put("last_row", String.valueOf(lastRowSpinner.getSelectedItem()));
+            request.put("first_seat", firstSeat);
+            request.put("last_seat", lastSeat);
+        } catch (Exception error) {
+            showScanError(error.getMessage());
+            return;
+        }
+
+        checkButton.setEnabled(false);
+        checkButton.setText("Scanning…");
+        resultTitle.setText(movie);
+        resultDates.setText(format(startDate) + "  —  " + format(endDate));
+        resultDetails.setText("Connecting to the Raspberry Pi and scanning showtimes…");
+        resultCard.setVisibility(View.VISIBLE);
+
+        networkExecutor.execute(() -> {
+            try {
+                JSONObject response = postJson(baseUrl + "/scan", request);
+                runOnUiThread(() -> showScanResults(response));
+            } catch (Exception error) {
+                runOnUiThread(() -> showScanError(error.getMessage()));
+            }
+        });
+    }
+
+    private JSONObject postJson(String address, JSONObject payload) throws Exception {
+        HttpURLConnection connection = (HttpURLConnection) new URL(address).openConnection();
+        connection.setRequestMethod("POST");
+        connection.setConnectTimeout(15_000);
+        connection.setReadTimeout(900_000);
+        connection.setDoOutput(true);
+        connection.setRequestProperty("Content-Type", "application/json; charset=utf-8");
+        byte[] body = payload.toString().getBytes(StandardCharsets.UTF_8);
+        connection.setFixedLengthStreamingMode(body.length);
+        try (OutputStream output = connection.getOutputStream()) { output.write(body); }
+
+        int status = connection.getResponseCode();
+        InputStream stream = status >= 400 ? connection.getErrorStream() : connection.getInputStream();
+        StringBuilder response = new StringBuilder();
+        try (BufferedReader reader = new BufferedReader(new InputStreamReader(stream, StandardCharsets.UTF_8))) {
+            String line;
+            while ((line = reader.readLine()) != null) response.append(line);
+        } finally {
+            connection.disconnect();
+        }
+        JSONObject json = new JSONObject(response.toString());
+        if (status >= 400) throw new Exception(json.optString("error", "Pi returned HTTP " + status));
+        return json;
+    }
+
+    private void showScanResults(JSONObject response) {
+        checkButton.setEnabled(true);
+        checkButton.setText("Check availability");
+        JSONArray results = response.optJSONArray("results");
+        if (results == null || results.length() == 0) {
+            resultDetails.setText("No published IMAX showtimes were found for these dates.");
+            return;
+        }
+
+        StringBuilder details = new StringBuilder();
+        for (int i = 0; i < results.length(); i++) {
+            JSONObject result = results.optJSONObject(i);
+            if (result == null) continue;
+            if (details.length() > 0) details.append("\n\n");
+            details.append(result.optString("date"));
+            String showtime = result.optString("showtime");
+            if (!showtime.isEmpty()) details.append("  •  ").append(showtime);
+            String error = result.optString("error");
+            if (!error.isEmpty()) {
+                details.append("\nCould not check this showing");
+                continue;
+            }
+            JSONArray seats = result.optJSONArray("seats");
+            details.append("\n");
+            if (seats == null || seats.length() == 0) {
+                details.append("No matching seats available");
+            } else {
+                for (int seat = 0; seat < seats.length(); seat++) {
+                    if (seat > 0) details.append(", ");
+                    details.append(seats.optString(seat));
+                }
+            }
+        }
+        resultDetails.setText(details.toString());
+        resultCard.announceForAccessibility("IMAX availability scan finished");
+    }
+
+    private void showScanError(String message) {
+        checkButton.setEnabled(true);
+        checkButton.setText("Check availability");
+        resultTitle.setText("Unable to scan");
+        resultDetails.setText(message == null ? "Unknown connection error" : message);
+        resultCard.setVisibility(View.VISIBLE);
     }
 
     private Spinner addChoice(LinearLayout parent, String caption, String[] values, int selected, boolean first) {
@@ -220,5 +345,11 @@ public class MainActivity extends Activity {
     private LinearLayout.LayoutParams margins(int l,int t,int r,int b){LinearLayout.LayoutParams p=matchWrap();p.setMargins(dp(l),dp(t),dp(r),dp(b));return p;}
     private LinearLayout.LayoutParams fixedHeight(int h,int l,int t,int r,int b){LinearLayout.LayoutParams p=new LinearLayout.LayoutParams(-1,dp(h));p.setMargins(dp(l),dp(t),dp(r),dp(b));return p;}
     private String format(Calendar c){DateFormat f=new SimpleDateFormat("MMM d, yyyy",Locale.getDefault());return f.format(c.getTime());}
+    private String isoFormat(Calendar c){DateFormat f=new SimpleDateFormat("yyyy-MM-dd",Locale.US);return f.format(c.getTime());}
     private int dp(int n){return Math.round(n*getResources().getDisplayMetrics().density);}
+
+    @Override protected void onDestroy() {
+        networkExecutor.shutdownNow();
+        super.onDestroy();
+    }
 }
