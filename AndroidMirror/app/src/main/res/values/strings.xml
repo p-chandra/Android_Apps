@@ -1,0 +1,16 @@
+<resources>
+<string name="app_name">AndroidMirror</string>
+<string name="mirror_wait">Open AndroidMirror on your phone and approve screen sharing.</string>
+<string name="stop_sharing">Stop sharing</string>
+<string name="start_sharing">Share phone screen</string>
+<string name="phone_only">Approve sharing on the phone’s built-in screen.</string>
+<string name="mirror_description">Live phone screen, view only. Drag to pan when zoomed.</string>
+<string name="zoom_title">Zoom</string>
+<string name="zoom_in">+</string>
+<string name="zoom_out">−</string>
+<string name="zoom_fit">Fit</string>
+<string name="zoom_in_description">Zoom in</string>
+<string name="zoom_out_description">Zoom out</string>
+<string name="zoom_fit_description">Fit the entire phone screen</string>
+<string name="zoom_percent">%1$d%%</string>
+</resources>

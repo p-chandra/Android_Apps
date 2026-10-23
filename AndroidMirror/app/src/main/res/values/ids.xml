@@ -1,0 +1,9 @@
+<resources>
+    <item name="mirror_viewport" type="id" />
+    <item name="mirror_surface" type="id" />
+    <item name="zoom_controls" type="id" />
+    <item name="zoom_in" type="id" />
+    <item name="zoom_out" type="id" />
+    <item name="zoom_fit" type="id" />
+    <item name="zoom_label" type="id" />
+</resources>
