@@ -129,10 +129,10 @@ forwarding is required.
 
 ### Raspberry Pi backend
 
-The app requires the companion backend located at:
+The app requires the consolidated companion backend in `RaspPi_Projects`, located at:
 
 ```text
-/home/pawan/workspace/IMAX_Seat_Tracker
+/home/pawan/workspace/RaspPi_Projects/IMAX_Seat_Tracker
 ```
 
 The Pi needs:
@@ -198,7 +198,7 @@ Expected response:
 If the service is not installed, start the backend manually:
 
 ```bash
-cd /home/p-c/Documents/IMAX_Seat_Tracker
+cd /home/p-c/Documents/RaspPi_Projects/IMAX_Seat_Tracker
 .venv/bin/python api_server.py
 ```
 
